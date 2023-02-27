@@ -91,7 +91,6 @@ public class Question7 {
 
     public static double simmulatedAnnealing(int iter, double temp_0){
         int[] solution = randomPermutation();
-        double x = 0.001/temp_0;
         double coolingRate = 0.9;
         for(int i=0; i<iter; ++i){
             int[] potSol = smallChange(solution);
