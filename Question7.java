@@ -14,7 +14,7 @@ public class Question7 {
         System.out.println("hillClimb averate: " + average/n);
         double average1 = 0;
         for(int i=0; i<n; ++i){
-            double y = simmulatedAnnealing(2000, 500);
+            double y = simmulatedAnnealing(2000, 56);
             average1 += y;
         }
         System.out.println("simmulated annealing averate: " + average1/n);
@@ -91,14 +91,15 @@ public class Question7 {
 
     public static double simmulatedAnnealing(int iter, double temp_0){
         int[] solution = randomPermutation();
-        double coolingRate = 0.9;
+        double currentTemp = temp_0;
+        double x = 0.001/temp_0;
+        double coolingRate = Math.pow(x,1.0/iter);
         for(int i=0; i<iter; ++i){
             int[] potSol = smallChange(solution);
             if(fitnessFunction(potSol)>fitnessFunction(solution)){
                 solution = potSol.clone();
             }
             else{
-                double currentTemp = temp_0 * Math.pow(coolingRate,i);
                 double p = PR((double)fitnessFunction(solution), (double)fitnessFunction(potSol), currentTemp);
                 Random rand = new Random();
                 int ur = rand.nextInt(0,2);
@@ -106,6 +107,7 @@ public class Question7 {
                     solution = potSol.clone();
                 }
             }
+            currentTemp = temp_0 * Math.pow(coolingRate,i);
         }
         return (double)fitnessFunction(solution);        
     }
