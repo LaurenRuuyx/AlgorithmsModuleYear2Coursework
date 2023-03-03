@@ -14,7 +14,7 @@ public class Question7 {
         System.out.println("hillClimb averate: " + average/n);
         double average1 = 0;
         for(int i=0; i<n; ++i){
-            double y = simmulatedAnnealing(2000, 56);
+            double y = simmulatedAnnealing(2000, 95.1);
             average1 += y;
         }
         System.out.println("simmulated annealing averate: " + average1/n);
