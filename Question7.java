@@ -5,20 +5,18 @@ import java.util.Set;
 public class Question7 {
     
     public static void main(String[] args){
-        double average = 0;
-        int n = 1000;
-        for(int i=0; i<n; ++i){
-            int x = hillClimb(3000);
-            average += x;
+        double av = 0;
+        double av1 = 0;
+        double x = 10000.0;
+        for(int i=1; i<x; ++i){
+            av += hillClimb(i);
+            av1 += simmulatedAnnealing(i);
         }
-        System.out.println("hillClimb averate: " + average/n);
-        double average1 = 0;
-        for(int i=0; i<n; ++i){
-            double y = simmulatedAnnealing(2000, 95.1);
-            average1 += y;
-        }
-        System.out.println("simmulated annealing averate: " + average1/n);
+        System.out.println("HillClimb: " + (av/x));
+        System.out.println("Simmulated Annealing: " + (av1/x));
 
+
+        
     }
 
     public static int[] randomPermutation(){
@@ -89,8 +87,10 @@ public class Question7 {
         return fitnessFunction(solution);
     }
 
-    public static double simmulatedAnnealing(int iter, double temp_0){
+    public static double simmulatedAnnealing(int iter){
+        double temp_0 = 3.532742;
         int[] solution = randomPermutation();
+        int[] BestSol = solution.clone();
         double currentTemp = temp_0;
         double x = 0.001/temp_0;
         double coolingRate = Math.pow(x,1.0/iter);
@@ -98,18 +98,22 @@ public class Question7 {
             int[] potSol = smallChange(solution);
             if(fitnessFunction(potSol)>fitnessFunction(solution)){
                 solution = potSol.clone();
+                if(fitnessFunction(BestSol)<fitnessFunction(potSol)){
+                    BestSol = potSol.clone();
+
+                }
             }
             else{
                 double p = PR((double)fitnessFunction(solution), (double)fitnessFunction(potSol), currentTemp);
                 Random rand = new Random();
-                int ur = rand.nextInt(0,2);
+                double ur = rand.nextDouble(0,1);
                 if(p>ur){
                     solution = potSol.clone();
                 }
             }
             currentTemp = temp_0 * Math.pow(coolingRate,i);
         }
-        return (double)fitnessFunction(solution);        
+        return (double)fitnessFunction(BestSol);        
     }
 
     public static double PR(double oldFitness,double newFitness,double currentTemp){
@@ -117,5 +121,19 @@ public class Question7 {
         double variable = ((difference * -1)/currentTemp);
         double p = Math.exp(variable);
         return p;
+    }
+
+    public static double averageWorseChange(double iter){
+        double av = 0;
+        for(int i=0; i<iter; i++){
+            int[] sol = randomPermutation();
+            int[] potSol = smallChange(sol);
+            double x = Math.abs(fitnessFunction(sol)-fitnessFunction(potSol));
+            av += x;
+
+        }
+        av = av/iter;
+        return av;
+
     }
 }
