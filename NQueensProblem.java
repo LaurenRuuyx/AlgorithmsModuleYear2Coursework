@@ -6,8 +6,8 @@ public class NQueensProblem {
 
     public static void main(String[] args){
 
-        System.out.println(simmulatedAnnealing(10, 100));
-        System.out.println(hillClimb(10, 100));
+        System.out.println(simmulatedAnnealing(500, 20));
+        System.out.println(hillClimb(500, 20));
 
         
     }
