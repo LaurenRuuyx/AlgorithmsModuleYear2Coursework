@@ -5,15 +5,8 @@ import java.util.Set;
 public class Question7 {
     
     public static void main(String[] args){
-        double av = 0;
-        double av1 = 0;
-        double x = 10000.0;
-        for(int i=1; i<x; ++i){
-            av += hillClimb(i);
-            av1 += simmulatedAnnealing(i);
-        }
-        System.out.println("HillClimb: " + (av/x));
-        System.out.println("Simmulated Annealing: " + (av1/x));
+       System.out.println(hillClimb(1000));
+       System.out.println(simmulatedAnnealing(1000));
 
 
         
@@ -74,7 +67,8 @@ public class Question7 {
 
     }
 
-    public static int hillClimb(int n){
+    public static String hillClimb(int n){
+        String binary = "";
         int[] solution = randomPermutation();
         for(int i=0; i<n; ++i){
             int[] potSol = smallChange(solution);
@@ -83,12 +77,18 @@ public class Question7 {
             }
 
         }
+        for(int i=0; i<solution.length; ++i){
+            String temp = Integer.toBinaryString(solution[i]);
+            temp = String.format("%3s", temp).replaceAll(" ", "0");
+            binary = binary + temp;
+        }
 
-        return fitnessFunction(solution);
+        return binary;
     }
 
-    public static double simmulatedAnnealing(int iter){
+    public static String simmulatedAnnealing(int iter){
         double temp_0 = 3.532742;
+        String binary = "";
         int[] solution = randomPermutation();
         int[] BestSol = solution.clone();
         double currentTemp = temp_0;
@@ -113,7 +113,13 @@ public class Question7 {
             }
             currentTemp = temp_0 * Math.pow(coolingRate,i);
         }
-        return (double)fitnessFunction(BestSol);        
+        for(int i=0; i<BestSol.length; ++i){
+            String temp = Integer.toBinaryString(BestSol[i]);
+            temp = String.format("%3s", temp).replaceAll(" ", "0");
+            binary = binary + temp;
+        }
+        System.out.println(binary.length());
+        return binary;        
     }
 
     public static double PR(double oldFitness,double newFitness,double currentTemp){
