@@ -118,7 +118,9 @@ public class Question7 {
             temp = String.format("%3s", temp).replaceAll(" ", "0");
             binary = binary + temp;
         }
-        System.out.println(binary.length());
+        for(int i=0; i<BestSol.length; ++i){
+            System.out.print(BestSol[i] + ", ");
+        }
         return binary;        
     }
 
