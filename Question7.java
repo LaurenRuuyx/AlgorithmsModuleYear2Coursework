@@ -5,8 +5,14 @@ import java.util.Set;
 public class Question7 {
     
     public static void main(String[] args){
-       System.out.println(hillClimb(1000));
-       System.out.println(simmulatedAnnealing(1000));
+    //     double avg = 0;
+    //     int iter = 5000;
+    //    for(int i=0; i<iter; ++i){
+    //     avg += (simmulatedAnnealing(i));
+
+    //    }
+    //    System.out.println(avg/iter);
+    System.out.println(simmulatedAnnealing(50));
 
 
         
@@ -86,7 +92,7 @@ public class Question7 {
         return binary;
     }
 
-    public static String simmulatedAnnealing(int iter){
+    public static double simmulatedAnnealing(int iter){
         double temp_0 = 3.532742;
         String binary = "";
         int[] solution = randomPermutation();
@@ -119,9 +125,8 @@ public class Question7 {
             binary = binary + temp;
         }
         for(int i=0; i<BestSol.length; ++i){
-            System.out.print(BestSol[i] + ", ");
         }
-        return binary;        
+        return fitnessFunction(BestSol);        
     }
 
     public static double PR(double oldFitness,double newFitness,double currentTemp){
