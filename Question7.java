@@ -5,14 +5,13 @@ import java.util.Set;
 public class Question7 {
     
     public static void main(String[] args){
-    //     double avg = 0;
-    //     int iter = 5000;
-    //    for(int i=0; i<iter; ++i){
-    //     avg += (simmulatedAnnealing(i));
+        double avg = 0;
+        int iter = 500;
+       for(int i=0; i<iter; ++i){
+        avg += (simmulatedAnnealing(i));
 
-    //    }
-    //    System.out.println(avg/iter);
-    System.out.println(simmulatedAnnealing(50));
+       }
+       System.out.println(avg/iter);
 
 
         
