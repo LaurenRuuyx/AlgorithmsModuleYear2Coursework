@@ -4,7 +4,13 @@ public class Question5 {
         System.out.println(fitnessFunction("001001001001001001001001"));        
     }
 
-    public static int fitnessFunction(String binary){
+    public static Integer fitnessFunction(String binary){
+        if(binary == null){
+            return null;
+        }
+        if(binary.length() != 24){
+            return null;
+        }
         String[] results = binary.split("(?<=\\G.{" + 3 + "})");
         int fitness = 56;
         int[] integerValues = new int[8];

@@ -5,14 +5,7 @@ import java.util.Set;
 public class Question7 {
     
     public static void main(String[] args){
-        double avg = 0;
-        int iter = 500;
-       for(int i=0; i<iter; ++i){
-        avg += (simmulatedAnnealing(i));
-
-       }
-       System.out.println(avg/iter);
-
+        System.out.println(simmulatedAnnealing(500));
 
         
     }
@@ -91,7 +84,7 @@ public class Question7 {
         return binary;
     }
 
-    public static double simmulatedAnnealing(int iter){
+    public static String simmulatedAnnealing(int iter){
         double temp_0 = 3.532742;
         String binary = "";
         int[] solution = randomPermutation();
@@ -125,7 +118,8 @@ public class Question7 {
         }
         for(int i=0; i<BestSol.length; ++i){
         }
-        return fitnessFunction(BestSol);        
+        System.out.println(fitnessFunction(BestSol));
+        return binary;        
     }
 
     public static double PR(double oldFitness,double newFitness,double currentTemp){
