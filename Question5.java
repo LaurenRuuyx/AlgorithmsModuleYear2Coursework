@@ -12,8 +12,6 @@ public class Question5 {
             integerValues[i] = Integer.parseInt(results[i],2);
         }  
         for(int i=0; i<8; ++i){
-
-
             for(int j=0; j<8; ++j){
                 if(i!=j){
                     if(integerValues[i]==integerValues[j]){
